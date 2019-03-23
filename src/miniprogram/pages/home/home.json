@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "content-tree": "/components/content-tree/content-tree",
+        "feed": "/components/feed/feed"
+    }
+}

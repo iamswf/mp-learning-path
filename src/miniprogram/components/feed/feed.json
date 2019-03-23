@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "reading-card": "/components/reading-card/reading-card"
+    }
+}

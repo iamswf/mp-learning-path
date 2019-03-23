@@ -1,0 +1,25 @@
+<view class="feed-container">
+    <block wx:if="{{type === 0}}">
+        <view calss="reading-feed">
+            <view
+                wx:for="{{data}}"
+                wx:for-index="idx"
+                wx:for-item="readingItem"
+                class="reading-feed-item"
+            >
+                <reading-card
+                    title="{{readingItem.title}}"
+                    read-date="{{readingItem.readDate}}"
+                    description="{{readingItem.description}}"
+                    image-url="{{readingItem.imageUrl}}"
+                ></reading-card>
+            </view>
+        </view>
+    </block>
+    <block wx:elif="{{type === 1}}">
+        writing block
+    </block>
+    <block wx:elif="{{type === 2}}">
+        talking block
+    </block>
+</view>

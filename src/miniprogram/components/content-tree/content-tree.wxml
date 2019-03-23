@@ -1,0 +1,20 @@
+<view class="content-tree">
+    <view
+        wx:for="{{contents}}"
+        wx:for-index="idx"
+        wx:for-item="content"
+        wx:key="_id"
+        class="content"
+    >
+        <view class="content-name">{{content.name}}</view>
+        <view
+            wx:for="{{content.subContents}}"
+            wx:for-index="idx"
+            wx:for-item="subContent"
+            wx:key="_id"
+            class="sub-content"
+        >
+            {{subContent.name}}
+        </view>
+    </view>
+</view>

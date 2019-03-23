@@ -1,0 +1,34 @@
+{
+    "name": "mp-learning-path",
+    "version": "1.0.0",
+    "description": "mini program for my learning path",
+    "scripts": {
+        "clean": "rm -rf dist",
+        "mock": "node mock/mock-server.js",
+        "dev:local": "gulp watch --env=local",
+        "dev:online": "gulp watch --env=online",
+        "release:local": "gulp build --env=local",
+        "release:online": "gulp build --env=online"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "devDependencies": {
+        "express": "^4.16.3",
+        "gulp": "^3.9.1",
+        "gulp-clean": "^0.4.0",
+        "gulp-file-include": "^2.0.1",
+        "gulp-filter": "^5.1.0",
+        "gulp-flatten": "^0.4.0",
+        "gulp-inline-source": "^3.1.0",
+        "gulp-less": "^3.5.0",
+        "gulp-plumber": "^1.2.0",
+        "gulp-rename": "^1.4.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-util": "^3.0.8",
+        "gulp-watch": "^5.0.0",
+        "less": "~2.0.0",
+        "mockservice": "^0.1.14"
+    }
+}

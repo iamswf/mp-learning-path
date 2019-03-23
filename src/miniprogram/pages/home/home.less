@@ -1,0 +1,36 @@
+.container-content {
+    width: 710rpx;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+canvas {
+    visibility: hidden;
+}
+
+.content {
+    transition: visibility 0s, opacity 0.5s, top 0.5s;
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #FFF;
+    z-index: 10;
+}
+
+.content.hide {
+    visibility: hidden;
+    opacity: 0;
+    top: 10px;
+}
+
+.toggle-button {
+    z-index: 100;
+    position: fixed;
+    bottom: 50rpx;
+    right: 20rpx;
+}

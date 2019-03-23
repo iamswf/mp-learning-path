@@ -1,0 +1,10 @@
+<view class="reading-card">
+    <view class="reading-card-left">
+        <image src="{{imageUrl}}" mode="widthFix" class="book-image"></image>
+    </view>
+    <view class="reading-card-right">
+        <view>{{title}}</view>
+        <view>{{readDate}}</view>
+        <view>{{description}}</view>
+    </view>
+</view>

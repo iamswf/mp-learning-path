@@ -1,0 +1,17 @@
+<!-- pages/home/home.wxml -->
+<view class="container">
+    <content-tree
+        class="content {{currentView === 0 ? 'show' : 'hide'}}"
+        contents="{{contents}}"
+    ></content-tree>
+    <feed
+        data="{{feedData}}"
+    ></feed>
+    <view class="toggle-button" bindtap="onToggle">
+        Toggle
+        <view>{{currentView}}</view>
+    </view>
+    <!-- <button bindtap="onClick">点击上传图片</button>
+    <view>{{size}}</view>
+    <canvas style="width: 300px; height: 200px;" canvas-id="photo_canvas"></canvas> -->
+</view>

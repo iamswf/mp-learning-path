@@ -1,0 +1,23 @@
+# dependencies
+/node_modules
+
+# release
+/output
+/dist
+
+# misc
+.DS_Store
+.swp
+
+npm-debug.log*
+
+# editor config
+.idea
+.vscode
+ms-error.log
+
+# git book
+_book
+
+# package lock
+package-lock.json
