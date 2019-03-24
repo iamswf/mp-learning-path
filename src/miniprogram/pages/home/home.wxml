@@ -11,6 +11,18 @@
         Toggle
         <view>{{currentView}}</view>
     </view>
+    <view
+        wx:if="{{isMyself}}"
+        class="add-button {{currentView === 0 ? 'hide' : 'show'}}"
+        bindtap="onAdd"
+    >
+        Add
+        {{isMyself ? '是iamswf' : '不是iamswf'}}
+        <!-- <button
+            open-type="getUserInfo"
+            bindgetuserinfo="getUserInfo"
+        >授权</button> -->
+    </view>
     <!-- <button bindtap="onClick">点击上传图片</button>
     <view>{{size}}</view>
     <canvas style="width: 300px; height: 200px;" canvas-id="photo_canvas"></canvas> -->

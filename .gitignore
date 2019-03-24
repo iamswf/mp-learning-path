@@ -21,3 +21,6 @@ _book
 
 # package lock
 package-lock.json
+
+# sensitive info
+/src/**/__*

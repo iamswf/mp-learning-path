@@ -4,6 +4,7 @@
  */
 
 import commonConfig from '../../config/common';
+import {promisify} from '../../libs/util';
 
 const props = {
     data: {
@@ -11,8 +12,34 @@ const props = {
         contents: [],
         feedData: [],
         size: 0,
+        isMyself: false
+    },
+    getUserInfo(res) {
+        const me = this;
+        wx.login({
+            success(res) {
+                if (res.code) {
+                    // 发起网络请求
+                    console.log(res.code);
+                    wx.cloud.callFunction({
+                        name: 'checkMyself',
+                        data: {code: res.code},
+                        success: (res) => {
+                            console.log('checkMyselfres', res);
+                            me.setData({
+                                isMyself: res.result
+                            });
+                        },
+                        fail: console.log
+                    });
+                } else {
+                    console.log('登录失败！' + res.errMsg)
+                }
+            }
+        })
     },
     onLoad() {
+        this.getUserInfo();
         wx.cloud.callFunction({
             name: 'fetchReadings',
             data: {},
