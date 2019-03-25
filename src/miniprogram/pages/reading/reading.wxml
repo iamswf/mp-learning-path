@@ -1,5 +1,14 @@
 <!-- pages/home/home.wxml -->
 <view class="container">
+    <dialog
+        show="{{currentEditType !== 0}}"
+    >
+        <reading-edit
+            class="reading-edit"
+            existing-contents="{{contents}}"
+        >
+        </reading-edit>
+    </dialog>
     <content-tree
         class="content {{currentView === 0 ? 'show' : 'hide'}}"
         contents="{{contents}}"

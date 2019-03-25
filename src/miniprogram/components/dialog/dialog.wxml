@@ -1,0 +1,18 @@
+<view class="dialog {{show ? 'show' : 'hide'}}">
+    <view class="dialog-modal">
+        <view
+            class="dialog-content"
+            style="width: {{width}};"
+        >
+            <view
+                class="dialog-content-close-button"
+                bindtap="onClose"
+            >
+                X
+            </view>
+            <view class="dialog-content-main-container">
+                <slot></slot>
+            </view>
+        </view>
+    </view>
+</view>

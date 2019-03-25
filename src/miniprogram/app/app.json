@@ -1,6 +1,6 @@
 {
     "pages": [
-        "pages/home/home",
+        "pages/reading/reading",
         "pages/writing/writing",
         "pages/talking/talking"
     ],
@@ -14,7 +14,7 @@
     "tabBar": {
         "list": [
             {
-                "pagePath": "pages/home/home",
+                "pagePath": "pages/reading/reading",
                 "text": "阅读"
             },
             {

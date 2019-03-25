@@ -1,0 +1,48 @@
+<view class="reading-edit">
+    <form
+        bindsubmit="formSubmit"
+        bindreset="formReset"
+    >
+        <input
+            placeholder="请输入阅读的书籍或者文章名称"
+        />
+        <input
+            placeholder="请简短介绍一下"
+        />
+        <wxs module="contentPicker">
+            function getExistingContentsNameList(existingContents) {
+                return existingContents.map(function (item) {
+                    return item.name;
+                });
+            }
+            module.exports = {
+                getExistingContentsNameList: getExistingContentsNameList
+            };
+        </wxs>
+        <picker
+            class="content-picker"
+            bindchange="bindContentPickerChange"
+            value="{{contentIndex}}"
+            range="{{contentPicker.getExistingContentsNameList(existingContents)}}"
+        >
+            <view class="picker">当前选择：{{existingContents[contentIndex].name}}</view>
+        </picker>
+        <picker
+            class="sub-content-picker"
+            bindchange="bindSubContentPickerChange"
+            value="{{subContentIndex}}"
+            range="{{contentPicker.getExistingContentsNameList(existingContents[contentIndex].subContents)}}"
+        >
+            <view class="picker">当前选择：{{existingContents[contentIndex].subContents[subContentIndex].name}}</view>
+        </picker>
+        <picker
+            mode="date"
+            value="{{date}}"
+            start="2015-09-01"
+            end="2017-09-01"
+            bindchange="bindDateChange"
+        >
+            <view class="picker">当前选择: {{date}}</view>
+        </picker>
+    </form>
+</view>

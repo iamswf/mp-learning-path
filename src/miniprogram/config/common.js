@@ -7,6 +7,11 @@ const COMMON_CONFIG = {
     VIEW_TYPE: {
         CATALOG: 0,
         CONTENT: 1
+    },
+    EDIT_TYPE: {
+        NONE: 0,
+        ADD: 1,
+        EDIT: 2
     }
 };
 

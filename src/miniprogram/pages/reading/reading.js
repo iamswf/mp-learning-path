@@ -8,11 +8,12 @@ import {promisify} from '../../libs/util';
 
 const props = {
     data: {
-        currentView: commonConfig.VIEW_TYPE.CATALOG,
+        currentView: commonConfig.VIEW_TYPE.CONTENT,
+        currentEditType: commonConfig.EDIT_TYPE.NONE,
         contents: [],
         feedData: [],
         size: 0,
-        isMyself: false
+        isMyself: true
     },
     getUserInfo(res) {
         const me = this;
@@ -26,9 +27,9 @@ const props = {
                         data: {code: res.code},
                         success: (res) => {
                             console.log('checkMyselfres', res);
-                            me.setData({
-                                isMyself: res.result
-                            });
+                            // me.setData({
+                            //     isMyself: res.result
+                            // });
                         },
                         fail: console.log
                     });
@@ -133,6 +134,11 @@ const props = {
             currentView: newView,
         });
     },
+    onAdd() {
+        this.setData({
+            currentEditType: commonConfig.EDIT_TYPE.ADD
+        });
+    }
 };
 
 Page(props);

@@ -1,5 +1,7 @@
 {
     "usingComponents": {
+        "dialog": "/components/dialog/dialog",
+        "reading-edit": "/components/reading-edit/reading-edit",
         "content-tree": "/components/content-tree/content-tree",
         "feed": "/components/feed/feed"
     }
