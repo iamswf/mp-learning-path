@@ -6,7 +6,9 @@
         "es6": true,
         "postcss": true,
         "minified": true,
-        "newFeature": true
+        "newFeature": true,
+        "autoAudits": false,
+        "nodeModules": true
     },
     "appid": "wx505e911158699082",
     "projectname": "my-learning-path",

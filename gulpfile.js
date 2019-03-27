@@ -24,6 +24,23 @@ gulp.task('project-config', function () {
 });
 
 /**
+ * package.json
+ */
+gulp.task('package-json', function () {
+    return gulp.src(__dirname + '/src/miniprogram/package*.json')
+        .pipe(gulp.dest('dist/miniprogram'));
+});
+
+/**
+ * production env node modules
+ */
+
+gulp.task('node-modules', function () {
+    return gulp.src(__dirname + '/src/miniprogram/node_modules/**')
+        .pipe(gulp.dest('dist/miniprogram/node_modules'));
+});
+
+/**
  * cloud functions
  */
 gulp.task('cloud-functions', function () {
@@ -44,13 +61,6 @@ gulp.task('resource', function () {
     return gulp.src(__dirname + '/src/miniprogram/resource/**/*')
         .pipe(gulp.dest('dist/miniprogram/resource'));
 });
-
-// gulp.task('dep', function () {
-//     return gulp.src(__dirname + '/node_modules/*/*')
-//         .pipe(filter(['node_modules/meld/meld.js']))
-//         .pipe(flatten())
-//         .pipe(gulp.dest('dist/libs'));
-// });
 
 gulp.task('libs', function () {
     return gulp.src(__dirname + '/src/miniprogram/libs/**/*')
@@ -124,6 +134,8 @@ gulp.task('less-compile-components', function () {
 
 gulp.task('build', [
     'project-config',
+    'package-json',
+    'node-modules',
     'cloud-functions',
     'app',
     'less-compile-page',
@@ -131,12 +143,11 @@ gulp.task('build', [
     'less-compile-components',
     'pages',
     'resource',
-    // 'dep',
     'libs',
     'config',
     'components'
 ]);
 
 gulp.task('watch', function () {
-    gulp.watch(['./src/cloudfunctions/**', './src/miniprogram/pages/**', './src/miniprogram/app/**', './src/miniprogram/libs/**', './src/miniprogram/components/**'], ['build']);
+    gulp.watch(['./src/project.config.json', './src/cloudfunctions/**', './src/miniprogram/package*.json', './src/miniprogram/pages/**', './src/miniprogram/app/**', './src/miniprogram/libs/**', './src/miniprogram/components/**'], ['build']);
 });
