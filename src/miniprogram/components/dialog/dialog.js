@@ -3,10 +3,6 @@ Component({
    * 组件的属性列表
    */
     properties: {
-        show: {
-            type: Boolean,
-            value: false
-        },
         width: {
             type: String,
             value: '92vw'
@@ -25,9 +21,7 @@ Component({
    */
     methods: {
         onClose(e) {
-            this.setData({
-                show: false
-            });
+            this.triggerEvent('close');
         }
     }
 })

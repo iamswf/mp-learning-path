@@ -1,9 +1,4 @@
 .dialog {
-    visibility: visible;
-    &.hide {
-        visibility: hidden;
-        display: none;
-    }
     &-modal {
         display: flex;
         justify-content: center;
@@ -29,12 +24,5 @@
         &-close-button {
             color: red;
         }
-    }
-}
-
-.dialog.hide {
-    .dialog-content {
-        opacity: 0.5;
-        transform: scale(1.1);
     }
 }

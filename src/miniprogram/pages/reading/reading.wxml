@@ -1,11 +1,14 @@
 <!-- pages/home/home.wxml -->
 <view class="container">
     <dialog
-        show="{{currentEditType !== 0}}"
+        wx:if="{{isEditing}}"
+        bindclose="onCloseEditDialog"
     >
         <reading-edit
             class="reading-edit"
             existing-contents="{{contents}}"
+            bindcancel="onCancelEdit"
+            bindsubmit="onSubmitEdit"
         >
         </reading-edit>
     </dialog>

@@ -1,4 +1,4 @@
-<view class="dialog {{show ? 'show' : 'hide'}}">
+<view class="dialog">
     <view class="dialog-modal">
         <view
             class="dialog-content"

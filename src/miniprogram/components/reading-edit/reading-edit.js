@@ -37,23 +37,37 @@ Component({
    * 组件的初始数据
    */
     data: {
+        title: '',
+        description: '',
+        isSaving: false
     },
 
     /**
    * 组件的方法列表
    */
     methods: {
-        bindContentPickerChange(e) {
+        onTitleChange(e) {
             this.setData({
-                contentIndex: +e.detail.value
+                title: e.detail.value
             });
         },
-        bindSubContentPickerChange(e) {
+        onDescriptionChange(e) {
+            this.setData({
+                description: e.detail.value
+            });
+        },
+        onContentPickerChange(e) {
+            this.setData({
+                contentIndex: +e.detail.value,
+                subContentIndex: 0
+            });
+        },
+        onSubContentPickerChange(e) {
             this.setData({
                 subContentIndex: +e.detail.value
             });
         },
-        bindDateChange(e) {
+        onDateChange(e) {
             this.setData({
                 date: e.detail.value
             });
@@ -110,6 +124,20 @@ Component({
             }).catch(err => {
                 console.error(err);
             });
+        },
+        onCancelBtnClick(e) {
+            const cancelEventDetail = {}; // detail对象，提供给事件监听函数
+            const cancelEventOption = {}; // 触发事件的选项
+            this.triggerEvent('cancel', cancelEventDetail, cancelEventOption);
+        },
+        onSubmitBtnClick(e) {
+            // TODO 收集并校验数据合法性
+            const title = this.data.title;
+            const description = this.data.description;
+            debugger
+            const submitEventDetail = {};
+            const submitEventOption = {};
+            this.triggerEvent('submit', submitEventDetail, submitEventOption);
         }
     },
 

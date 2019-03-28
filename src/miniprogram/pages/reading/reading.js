@@ -6,10 +6,32 @@
 import commonConfig from '../../config/common';
 import {promisify} from '../../libs/util';
 
+const adjustReadingContents = contents => {
+    const adjustedConents = [
+        {
+            name: '请选择阅读题材',
+            subContents: []
+        },
+        ...contents
+    ].map(item => {
+        return {
+            ...item,
+            subContents: [
+                {
+                    name: '请选择阅读子类'
+                },
+                ...item.subContents
+            ]
+        }
+    });
+    return adjustedConents;
+};
+
 const props = {
     data: {
         currentView: commonConfig.VIEW_TYPE.CONTENT,
         currentEditType: commonConfig.EDIT_TYPE.NONE,
+        isEditing: false,
         contents: [],
         feedData: [],
         size: 0,
@@ -56,8 +78,9 @@ const props = {
             name: 'fetchReadingContent',
             data: {},
             success: (res) => {
+                const contents = adjustReadingContents(res.result);
                 this.setData({
-                    contents: res.result,
+                    contents
                 });
             },
             fail: console.log,
@@ -136,8 +159,22 @@ const props = {
     },
     onAdd() {
         this.setData({
-            currentEditType: commonConfig.EDIT_TYPE.ADD
+            currentEditType: commonConfig.EDIT_TYPE.ADD,
+            isEditing: true
         });
+    },
+    onCloseEditDialog() {
+        this.setData({
+            isEditing: false
+        });
+    },
+    onCancelEdit() {
+        this.setData({
+            isEditing: false
+        });
+    },
+    onSubmitEdit() {
+        debugger
     }
 };
 

@@ -4,10 +4,18 @@
         bindreset="formReset"
     >
         <input
+            class="reading-edit-title"
             placeholder="请输入阅读的书籍或者文章名称"
+            value="{{title}}"
+            type="text"
+            bindinput="onTitleChange"
         />
         <input
+            class="reading-edit-description"
             placeholder="请简短介绍一下"
+            value="{{description}}"
+            type="text"
+            bindinput="onDescriptionChange"
         />
         <wxs module="contentPicker">
             function getExistingContentsNameList(existingContents) {
@@ -19,28 +27,35 @@
                 getExistingContentsNameList: getExistingContentsNameList
             };
         </wxs>
-        <picker
-            class="content-picker"
-            bindchange="bindContentPickerChange"
-            value="{{contentIndex}}"
-            range="{{contentPicker.getExistingContentsNameList(existingContents)}}"
-        >
-            <view class="picker">当前选择：{{existingContents[contentIndex].name}}</view>
-        </picker>
-        <picker
-            class="sub-content-picker"
-            bindchange="bindSubContentPickerChange"
-            value="{{subContentIndex}}"
-            range="{{contentPicker.getExistingContentsNameList(existingContents[contentIndex].subContents)}}"
-        >
-            <view class="picker">当前选择：{{existingContents[contentIndex].subContents[subContentIndex].name}}</view>
-        </picker>
+        <view class="reading-edit-content-picker">
+            <label>大类：</label>
+            <picker
+                class="content-picker"
+                bindchange="onContentPickerChange"
+                value="{{contentIndex}}"
+                range="{{contentPicker.getExistingContentsNameList(existingContents)}}"
+            >
+                <view class="picker">{{existingContents[contentIndex].name}}</view>
+            </picker>
+        </view>
+        <view  class="reading-edit-content-picker">
+            <label>子类：</label>
+            <picker
+                class="sub-content-picker {{!contentIndex ? 'disabled' : ''}}"
+                disabled="{{!contentIndex}}"
+                bindchange="onSubContentPickerChange"
+                value="{{subContentIndex}}"
+                range="{{contentPicker.getExistingContentsNameList(existingContents[contentIndex].subContents)}}"
+            >
+                <view class="picker">{{existingContents[contentIndex].subContents[subContentIndex].name}}</view>
+            </picker>
+        </view>
         <picker
             mode="date"
             value="{{date}}"
             start="2015-09-01"
             end="2017-09-01"
-            bindchange="bindDateChange"
+            bindchange="onDateChange"
         >
             <view class="picker">当前选择: {{date}}</view>
         </picker>
@@ -51,6 +66,19 @@
                 style="width: 300px; height: 200px;"
                 canvas-id="photo_canvas"
             ></canvas>
+        </view>
+        <view class="reading-edit-footer">
+            <button
+                size="mini"
+                type="default"
+                bindtap="onCancelBtnClick"
+            >取消</button>
+            <button
+                size="mini"
+                type="primary"
+                loading="{{isSaving}}"
+                bindtap="onSubmitBtnClick"
+            >确认</button>
         </view>
     </form>
 </view>
