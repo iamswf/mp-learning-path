@@ -37,6 +37,12 @@
             >
                 <view class="picker">{{existingContents[contentIndex].name}}</view>
             </picker>
+            <input
+                placeholder="新建大类"
+                value="{{newContent}}"
+                type="text"
+                bindinput="onNewContentChange"
+            />
         </view>
         <view  class="reading-edit-content-picker">
             <label>子类：</label>
@@ -49,6 +55,12 @@
             >
                 <view class="picker">{{existingContents[contentIndex].subContents[subContentIndex].name}}</view>
             </picker>
+            <input
+                placeholder="新建子类"
+                value="{{newSubContent}}"
+                type="text"
+                bindinput="onNewSubContentChange"
+            />
         </view>
         <picker
             mode="date"
@@ -60,10 +72,13 @@
             <view class="picker">当前选择: {{date}}</view>
         </picker>
         <view>
-            <button bindtap="onPicUploadBtnClick">点击上传图片</button>
+            <button
+                size="mini"
+                bindtap="onPicUploadBtnClick"
+            >点击上传图片</button>
             <view>{{size}}</view>
             <canvas
-                style="width: 300px; height: 200px;"
+                style="width: 300px;height: 100px;"
                 canvas-id="photo_canvas"
             ></canvas>
         </view>

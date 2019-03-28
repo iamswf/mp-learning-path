@@ -39,7 +39,9 @@ Component({
     data: {
         title: '',
         description: '',
-        isSaving: false
+        isSaving: false,
+        newContent: '',
+        subContent: ''
     },
 
     /**
@@ -62,9 +64,19 @@ Component({
                 subContentIndex: 0
             });
         },
+        onNewContentChange(e) {
+            this.setData({
+                newContent: e.detail.value
+            });
+        },
         onSubContentPickerChange(e) {
             this.setData({
                 subContentIndex: +e.detail.value
+            });
+        },
+        onNewSubContentChange(e) {
+            this.setData({
+                newSubContent: e.detail.value
             });
         },
         onDateChange(e) {
@@ -88,15 +100,8 @@ Component({
                 // canvas渲染压缩并临时存储
                 const {width, height, filePath} = res;
                 const ctx = wx.createCanvasContext('photo_canvas', this);
-                let ratio = 1.2;
-                let canvasWidth = width;
-                let canvasHeight = height;
-                // 保证宽高均在100以内
-                while (canvasWidth > 100 || canvasHeight > 100) {
-                    canvasWidth = Math.trunc(width / ratio);
-                    canvasHeight = Math.trunc(height / ratio);
-                    ratio++;
-                }
+                const canvasHeight = 100;
+                const canvasWidth = Math.min(width / height * canvasHeight, 300);
                 ctx.drawImage(filePath, 0, 0, canvasWidth, canvasHeight);
                 return new Promise((resolve, reject) => {
                     ctx.draw(false, () => {

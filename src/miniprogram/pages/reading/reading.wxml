@@ -35,7 +35,4 @@
             bindgetuserinfo="getUserInfo"
         >授权</button> -->
     </view>
-    <!-- <button bindtap="onClick">点击上传图片</button>
-    <view>{{size}}</view>
-    <canvas style="width: 300px; height: 200px;" canvas-id="photo_canvas"></canvas> -->
 </view>
