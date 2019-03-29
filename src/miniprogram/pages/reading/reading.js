@@ -6,27 +6,6 @@
 import commonConfig from '../../config/common';
 import {promisify} from '../../libs/util';
 
-const adjustReadingContents = contents => {
-    const adjustedConents = [
-        {
-            name: '请选择阅读题材',
-            subContents: []
-        },
-        ...contents
-    ].map(item => {
-        return {
-            ...item,
-            subContents: [
-                {
-                    name: '请选择阅读子类'
-                },
-                ...item.subContents
-            ]
-        }
-    });
-    return adjustedConents;
-};
-
 const props = {
     data: {
         currentView: commonConfig.VIEW_TYPE.CONTENT,
@@ -78,7 +57,7 @@ const props = {
             name: 'fetchReadingContent',
             data: {},
             success: (res) => {
-                const contents = adjustReadingContents(res.result);
+                const contents = res.result;
                 this.setData({
                     contents
                 });

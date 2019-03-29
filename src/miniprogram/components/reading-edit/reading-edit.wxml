@@ -33,9 +33,9 @@
                 class="content-picker"
                 bindchange="onContentPickerChange"
                 value="{{contentIndex}}"
-                range="{{contentPicker.getExistingContentsNameList(existingContents)}}"
+                range="{{contentPicker.getExistingContentsNameList(adjustedExistingContents)}}"
             >
-                <view class="picker">{{existingContents[contentIndex].name}}</view>
+                <view class="picker">{{adjustedExistingContents[contentIndex].name}}</view>
             </picker>
             <input
                 placeholder="新建大类"
@@ -51,9 +51,9 @@
                 disabled="{{!contentIndex}}"
                 bindchange="onSubContentPickerChange"
                 value="{{subContentIndex}}"
-                range="{{contentPicker.getExistingContentsNameList(existingContents[contentIndex].subContents)}}"
+                range="{{contentPicker.getExistingContentsNameList(adjustedExistingContents[contentIndex].subContents)}}"
             >
-                <view class="picker">{{existingContents[contentIndex].subContents[subContentIndex].name}}</view>
+                <view class="picker">{{adjustedExistingContents[contentIndex].subContents[subContentIndex].name}}</view>
             </picker>
             <input
                 placeholder="新建子类"
