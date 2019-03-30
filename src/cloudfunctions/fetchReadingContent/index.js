@@ -1,10 +1,9 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
-const DEVELOPMENT_CLOUD_ENV = 'test-c906c7';
+const cloud = require('wx-server-sdk');
 cloud.init({
-    env: DEVELOPMENT_CLOUD_ENV
-})
-const wxContext = cloud.getWXContext()
+    env: 'CLOUD_ENV'
+});
+
 const db = cloud.database()
 
 async function fetchReadingSubCategory() {

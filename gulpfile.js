@@ -44,7 +44,10 @@ gulp.task('node-modules', function () {
  * cloud functions
  */
 gulp.task('cloud-functions', function () {
-    return gulp.src(__dirname + '/src/cloudfunctions/**')
+    return gulp.src(__dirname + '/src/cloudfunctions/**/*')
+        .pipe(replace(new RegExp(Object.keys(envConfig[env]).join('|'), 'gi'), function (match) {
+            return envConfig[env][match];
+        }))
         .pipe(gulp.dest('dist/cloudfunctions'));
 });
 

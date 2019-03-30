@@ -1,9 +1,8 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
-const DEVELOPMENT_CLOUD_ENV = 'test-c906c7';
+const cloud = require('wx-server-sdk');
 cloud.init({
-    env: DEVELOPMENT_CLOUD_ENV
-})
+    env: 'CLOUD_ENV'
+});
 
 // 云函数入口函数
 exports.main = async (event, context) => {

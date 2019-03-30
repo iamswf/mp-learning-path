@@ -31,6 +31,91 @@ const adjustReadingContents = contents => {
     return adjustedConents;
 };
 
+const validate = data => {
+    const {
+        title,
+        description,
+        contentIndex,
+        subContentIndex,
+        newContent,
+        newSubContent,
+        imageFileId
+    } = data;
+    let res = {
+        isValid: true,
+        message: ''
+    };
+    let isValid = true;
+    let message = '';
+    if (!title) {
+        res.isValid = false;
+        res.message = '请填写阅读标题';
+        return res;
+    }
+    if (!description) {
+        res.isValid = false;
+        res.message = '请填写简短介绍';
+        return res;
+    }
+    if (contentIndex === 0 && !newContent) {
+        res.isValid = false;
+        res.message = '请选择或新建阅读题材';
+        return res;
+    }
+    if (newContent) {
+        if (!newSubContent) {
+            res.isValid = false;
+            res.message = '已新建阅读题材，请继续新建阅读子类';
+            return res;
+        }
+    } else if (subContentIndex === 0 && !newSubContent) {
+        res.isValid = false;
+        res.message = '请选择或新建阅读子类';
+        return res;
+    }
+    if (!imageFileId) {
+        res.isValid = false;
+        res.message = '请上传阅读数据封面或者截图';
+        return res;
+    }
+    return res;
+};
+
+const collectData = data => {
+    const {
+        title,
+        description,
+        contentIndex,
+        subContentIndex,
+        newContent,
+        newSubContent,
+        date,
+        imageFileId
+    } = data;
+    let content;
+    let subContent;
+    if (newContent) {
+        // 如果有新建阅读题裁，则按新建走
+        content = {name: newContent};
+        subContent = {name: newSubContent};
+    } else if (newSubContent) {
+        // 如果是选择已有题裁，并且新建子类，则按新建子类走
+        content = data.adjustedExistingContents[contentIndex];
+        subContent = {name: newSubContent};
+    } else {
+        content = data.adjustedExistingContents[contentIndex];
+        subContent = content[subContentIndex];
+    }
+    return {
+        title,
+        description,
+        content,
+        subContent,
+        date,
+        imageFileId
+    };
+};
+
 Component({
     /**
    * 组件的属性列表
@@ -43,18 +128,6 @@ Component({
                 // 属性被改变时执行的函数（可选），通常 newVal 就是新设置的数据， oldVal 是旧数
                 // 新版本基础库不推荐使用这个字段，而是使用 Component 构造器的 observer 字段代替（这样会有更强的功能和更好的性能）
             }
-        },
-        contentIndex: {
-            type: Number,
-            value: 0
-        },
-        subContentIndex: {
-            type: Number,
-            value: 0
-        },
-        date: {
-            type: String,
-            value: '2016-03-12'
         }
     },
 
@@ -64,9 +137,14 @@ Component({
     data: {
         title: '',
         description: '',
-        isSaving: false,
+        contentIndex: 0,
+        subContentIndex: 0,
         newContent: '',
-        subContent: ''
+        newSubContent: '',
+        date: '1990-03-13',
+        imageFileId: '',
+        isSubmitBtnDisabled: true,
+        isSaving: false
     },
 
     /**
@@ -149,8 +227,9 @@ Component({
                     filePath: res.tempFilePath
                 });
             }).then(res => {
-                debugger
-                console.log(res.fileID);
+                this.setData({
+                    imageFileId: res.fileID
+                });
             }).catch(err => {
                 console.error(err);
             });
@@ -161,13 +240,17 @@ Component({
             this.triggerEvent('cancel', cancelEventDetail, cancelEventOption);
         },
         onSubmitBtnClick(e) {
-            // TODO 收集并校验数据合法性
-            const title = this.data.title;
-            const description = this.data.description;
-            debugger
-            const submitEventDetail = {};
-            const submitEventOption = {};
-            this.triggerEvent('submit', submitEventDetail, submitEventOption);
+            const validationRes = validate(this.data);
+            if (!validationRes.isValid) {
+                wx.showToast({
+                    title: validationRes.message,
+                    icon: 'none',
+                    duration: 1000
+                });
+                return;
+            }
+            const dataToSubmit = collectData(this.data);
+            this.triggerEvent('submit', dataToSubmit, {});
         }
     },
 

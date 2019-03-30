@@ -19,9 +19,11 @@ const getLocalHost = () => {
 const envConfig = {
     local: {
         'REQUEST-ORIGIN': 'http://' + getLocalHost() + ':8090',
+        'CLOUD_ENV': 'test-c906c7'
     },
     online: {
-        'REQUEST-ORIGIN': 'https://iamswf.163.com'
+        'REQUEST-ORIGIN': 'https://iamswf.163.com',
+        'CLOUD_ENV': 'my-learning-path-43f5ab'
     }
 };
 
