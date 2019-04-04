@@ -38,14 +38,7 @@ const props = {
         // 验证是否是自己
         this.checkMyself();
         // 获取阅读feed流数据
-        wx.cloud.callFunction({
-            name: 'fetchReadings',
-            data: {}
-        }).then(res => {
-            this.setData({
-                feedData: res.result.data
-            })
-        }).catch(console.error);
+        this.fetchReadings();
         // 获取阅读目录
         wx.cloud.callFunction({
             name: 'fetchReadingContent',
@@ -54,6 +47,26 @@ const props = {
             this.setData({
                 contents: res.result
             });
+        }).catch(console.error);
+    },
+    fetchReadings(options = {}) {
+        const {subContentId} = options;
+        const fetchParams = {};
+        if (subContentId) {
+            fetchParams.subContentId = subContentId;
+        }
+        wx.cloud.callFunction({
+            name: 'fetchReadings',
+            data: fetchParams
+        }).then(res => {
+            const {status, data} = res.result;
+            if (status === 0) {
+                this.setData({
+                    feedData: res.result.data.data
+                });
+            } else {
+                console.error('readings数据请求错误');
+            }
         }).catch(console.error);
     },
     onToggle() {
@@ -82,8 +95,27 @@ const props = {
     },
     onSubmitEdit(e) {
         const dataToSubmit = e.detail;
-
-        debugger
+        wx.cloud.callFunction({
+            name: 'addReadingItem',
+            data: {
+                data: dataToSubmit
+            }
+        }).then(res => {
+            this.setData({
+                isEditing: false
+            });
+        }).catch(console.error);
+    },
+    onSubContentClick(e) {
+        const subContentId = e.detail.id;
+        // clear feed data first
+        this.setData({
+            feedData: []
+        });
+        this.fetchReadings({subContentId});
+        this.setData({
+            currentView: commonConfig.VIEW_TYPE.CONTENT
+        });
     }
 };
 

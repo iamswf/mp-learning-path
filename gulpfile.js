@@ -138,7 +138,7 @@ gulp.task('less-compile-components', function () {
 gulp.task('build', [
     'project-config',
     'package-json',
-    'node-modules',
+    // 'node-modules',
     'cloud-functions',
     'app',
     'less-compile-page',

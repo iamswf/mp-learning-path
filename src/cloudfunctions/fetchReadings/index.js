@@ -6,14 +6,24 @@ cloud.init({
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-    const wxContext = cloud.getWXContext()
     const db = cloud.database()
+    const subCategoryId = event.subContentId;
     let res;
+    const whereParams = subCategoryId ? {subCategoryId} : {};
     try {
-        res = await db.collection('readings').get()
-        console.log('readings res', res);
+        const readings = await db.collection('readings')
+            .where(whereParams)
+            .get();
+        res = {
+            status: 0,
+            data: readings
+        };
     } catch (err) {
-        console.error('errrrrr', err)
+        console.error(err);
+        res = {
+            status: 500,
+            data: null
+        };
     }
     return res;
-}
+};

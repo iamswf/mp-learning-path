@@ -11,8 +11,9 @@
             wx:for="{{content.subContents}}"
             wx:for-index="idx"
             wx:for-item="subContent"
-            wx:key="_id"
             class="sub-content"
+            bindtap="onSubContentClick"
+            data-id="{{subContent._id}}"
         >
             {{subContent.name}}
         </view>

@@ -17,6 +17,9 @@ Component({
    * 组件的方法列表
    */
     methods: {
-
+        onSubContentClick(e) {
+            const id = e.currentTarget.dataset.id;
+            this.triggerEvent('subcontentclick', {id});
+        }
     }
 });

@@ -15,24 +15,21 @@
     <content-tree
         class="content {{currentView === 0 ? 'show' : 'hide'}}"
         contents="{{contents}}"
+        bindsubcontentclick="onSubContentClick"
     ></content-tree>
     <feed
         data="{{feedData}}"
     ></feed>
-    <view class="toggle-button" bindtap="onToggle">
-        Toggle
-        <view>{{currentView}}</view>
+    <view class="toggle-button {{currentView === 0 ? 'toggle-button-content' : 'toggle-button-feed'}}" bindtap="onToggle">
+        <view wx:if="{{currentView === 1}}" class="arrow-up"></view>
+        <view wx:if="{{currentView === 1}}" class="arrow-down"></view>
+        <view wx:if="{{currentView === 0}}" class="cross"></view>
     </view>
     <view
         wx:if="{{isMyself}}"
         class="add-button {{currentView === 0 ? 'hide' : 'show'}}"
         bindtap="onAdd"
     >
-        Add
-        {{isMyself ? '是iamswf' : '不是iamswf'}}
-        <!-- <button
-            open-type="getUserInfo"
-            bindgetuserinfo="getUserInfo"
-        >授权</button> -->
+        <view class="plus"></view>
     </view>
 </view>
