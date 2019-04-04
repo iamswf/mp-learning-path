@@ -16,7 +16,8 @@ const props = {
         contents: [],
         feedData: [],
         size: 0,
-        isMyself: true
+        isMyself: true,
+        isFetching: false
     },
     checkMyself() {
         wxLogin()
@@ -50,6 +51,9 @@ const props = {
         }).catch(console.error);
     },
     fetchReadings(options = {}) {
+        this.setData({
+            isFetching: true
+        });
         const {subContentId} = options;
         const fetchParams = {};
         if (subContentId) {
@@ -62,12 +66,21 @@ const props = {
             const {status, data} = res.result;
             if (status === 0) {
                 this.setData({
-                    feedData: res.result.data.data
+                    feedData: res.result.data.data,
+                    isFetching: false
                 });
             } else {
+                this.setData({
+                    isFetching: false
+                });
                 console.error('readings数据请求错误');
             }
-        }).catch(console.error);
+        }).catch(err => {
+            console.error(err);
+            this.setData({
+                isFetching: false
+            });
+        });
     },
     onToggle() {
         const newView = this.data.currentView === commonConfig.VIEW_TYPE.CATALOG

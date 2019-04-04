@@ -17,6 +17,12 @@
         contents="{{contents}}"
         bindsubcontentclick="onSubContentClick"
     ></content-tree>
+    <view
+        wx:if="{{isFetching}}"
+        class="loading"
+    >
+        加载中...
+    </view>
     <feed
         data="{{feedData}}"
     ></feed>
