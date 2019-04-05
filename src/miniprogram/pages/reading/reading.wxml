@@ -14,8 +14,10 @@
     </dialog>
     <content-tree
         class="content {{currentView === 0 ? 'show' : 'hide'}}"
-        contents="{{contents}}"
+        contents="{{contentTreeData}}"
+        bindcontentclick="onContentClick"
         bindsubcontentclick="onSubContentClick"
+        current-selected-id="{{currentSelectedContentId}}"
     ></content-tree>
     <view
         wx:if="{{isFetching}}"

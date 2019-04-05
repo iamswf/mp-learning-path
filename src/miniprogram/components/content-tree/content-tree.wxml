@@ -3,19 +3,20 @@
         wx:for="{{contents}}"
         wx:for-index="idx"
         wx:for-item="content"
-        wx:key="_id"
-        class="content"
+        class="content {{content._id === currentSelectedId ? 'selected' : ''}}"
+        catchtap="onContentClick"
+        data-id="{{content._id}}"
     >
         <view class="content-name">{{content.name}}</view>
         <view
             wx:for="{{content.subContents}}"
             wx:for-index="idx"
             wx:for-item="subContent"
-            class="sub-content"
-            bindtap="onSubContentClick"
+            class="sub-content {{subContent._id === currentSelectedId ? 'selected' : ''}}"
+            catchtap="onSubContentClick"
             data-id="{{subContent._id}}"
         >
-            {{subContent.name}}
+            <view class="sub-content-name">{{subContent.name}}</view>
         </view>
     </view>
 </view>

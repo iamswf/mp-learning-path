@@ -8,12 +8,16 @@ import {promisify} from '../../libs/util';
 
 const wxLogin = promisify(wx.login);
 
+const CONTENT_ALL_ID = '0';
+
 const props = {
     data: {
         currentView: commonConfig.VIEW_TYPE.CONTENT,
         currentEditType: commonConfig.EDIT_TYPE.NONE,
         isEditing: false,
         contents: [],
+        contentTreeData: [],
+        currentSelectedContentId: CONTENT_ALL_ID,
         feedData: [],
         size: 0,
         isMyself: true,
@@ -45,8 +49,18 @@ const props = {
             name: 'fetchReadingContent',
             data: {}
         }).then(res => {
+            const contents = res.result;
+            const contentTreeData = [
+                {
+                    name: '全部',
+                    _id: CONTENT_ALL_ID,
+                    subContents: []
+                },
+                ...contents
+            ];
             this.setData({
-                contents: res.result
+                contents,
+                contentTreeData
             });
         }).catch(console.error);
     },
@@ -119,6 +133,24 @@ const props = {
             });
         }).catch(console.error);
     },
+    onContentClick(e) {
+        const contentId = e.detail.id;
+        // clear feed data first
+        this.setData({
+            feedData: []
+        });
+        if (contentId === CONTENT_ALL_ID) {
+            this.fetchReadings();
+        } else {
+            this.fetchReadings({
+                contentId
+            });
+        }
+        this.setData({
+            currentView: commonConfig.VIEW_TYPE.CONTENT,
+            currentSelectedContentId: contentId
+        });
+    },
     onSubContentClick(e) {
         const subContentId = e.detail.id;
         // clear feed data first
@@ -127,7 +159,8 @@ const props = {
         });
         this.fetchReadings({subContentId});
         this.setData({
-            currentView: commonConfig.VIEW_TYPE.CONTENT
+            currentView: commonConfig.VIEW_TYPE.CONTENT,
+            currentSelectedContentId: subContentId
         });
     }
 };

@@ -3,6 +3,10 @@ Component({
         contents: {
             type: Array,
             value: []
+        },
+        currentSelectedId: {
+            type: String,
+            value: ''
         }
     },
 
@@ -17,6 +21,10 @@ Component({
    * 组件的方法列表
    */
     methods: {
+        onContentClick(e) {
+            const id = e.currentTarget.dataset.id;
+            this.triggerEvent('contentclick', {id});
+        },
         onSubContentClick(e) {
             const id = e.currentTarget.dataset.id;
             this.triggerEvent('subcontentclick', {id});

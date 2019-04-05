@@ -1,10 +1,10 @@
 <view class="reading-card">
     <view class="reading-card-left">
-        <image src="{{imageUrl}}" mode="widthFix" class="book-image"></image>
+        <image src="{{imageUrl}}" mode="aspectFit" class="book-image"></image>
     </view>
     <view class="reading-card-right">
-        <view>{{title}}</view>
-        <view>{{readDate}}</view>
-        <view>{{description}}</view>
+        <view class="title">{{title}}</view>
+        <view class="read-date">阅读时间：{{readDate}}</view>
+        <view class="description">简单介绍：{{description}}</view>
     </view>
 </view>

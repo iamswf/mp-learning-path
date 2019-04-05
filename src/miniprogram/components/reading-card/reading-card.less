@@ -1,10 +1,9 @@
 .reading-card {
     margin-bottom: 20px;
-    border: 2px solid #eee;
-    background: #eee;
+    background-color: #eee;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    height: 300rpx;
 }
 
 .reading-card-left {
@@ -14,10 +13,20 @@
 
 .reading-card-right {
     flex: 0 2 500rpx;
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    .read-date, .description {
+        color: #6a6a6a;
+        font-size: 12px;
+    }
 }
 
 .reading-card-left .book-image {
     display: block;
-    width: 200rpx;
+    width: auto;
+    height: 300rpx;
 }
 

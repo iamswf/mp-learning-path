@@ -1,10 +1,22 @@
 .content-tree {
+    margin-left: 10px;
+    color: #443412;
     .content {
+        margin: 10px 0;
+        font-size: 16px;
         .content-name {
             font-weight: bold;
         }
         .sub-content {
-            margin-left: 50rpx;
+            font-size: 14px;
+            margin-top: 5px;
+            padding: 5px 0 5px 30px;
         }
+    }
+    .selected > .content-name {
+        background-color: #61DAFB;
+    }
+    .selected.sub-content {
+        background-color: #61DAFB;
     }
 }
