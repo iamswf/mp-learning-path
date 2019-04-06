@@ -1,4 +1,7 @@
-{
+{  
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTitleText": "阿飞 · 演讲",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
     }
 }

@@ -20,7 +20,7 @@ const props = {
         currentSelectedContentId: CONTENT_ALL_ID,
         feedData: [],
         size: 0,
-        isMyself: true,
+        isMyself: false,
         isFetching: false
     },
     checkMyself() {

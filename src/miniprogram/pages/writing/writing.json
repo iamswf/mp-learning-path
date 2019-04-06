@@ -1,4 +1,7 @@
 {
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTitleText": "阿飞 · 写作",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
     }
 }

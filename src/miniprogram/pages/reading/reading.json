@@ -1,4 +1,7 @@
 {
+    "navigationBarBackgroundColor": "#FFF",
+    "navigationBarTitleText": "阿飞 · 读书",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
         "dialog": "/components/dialog/dialog",
         "reading-edit": "/components/reading-edit/reading-edit",
